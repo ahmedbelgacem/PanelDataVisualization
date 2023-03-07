@@ -3,6 +3,7 @@ import numpy as np
 import holoviews as hv
 import pandas as pd
 from components.table import Table
+from components.Heatmap import Heatmap
 
 pn.extension(sizing_mode = 'stretch_width')
 vanilla = pn.template.VanillaTemplate(title='Vanilla Template')
@@ -23,7 +24,11 @@ xs = np.linspace(0, np.pi)
 freq = pn.widgets.FloatSlider(name="Frequency", start=0, end=10, value=2)
 phase = pn.widgets.FloatSlider(name="Phase", start=0, end=np.pi)
 
-
+vanilla.main.append(
+    pn.Row(
+        pn.Card(Heatmap(df_data), title='Feature Correlation'),
+    )
+)
 @pn.depends(freq=freq, phase=phase)
 def sine(freq, phase):
     return hv.Curve((xs, np.sin(xs*freq+phase))).opts(
