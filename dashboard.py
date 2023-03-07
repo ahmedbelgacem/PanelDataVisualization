@@ -5,6 +5,7 @@ import pandas as pd
 from components.table import Table
 from components.Heatmap import Heatmap
 from config import DATA_PATH
+
 pn.extension(sizing_mode = 'stretch_width')
 vanilla = pn.template.VanillaTemplate(title = 'Vanilla Template')
 pn.widgets.Tabulator.theme = 'materialize'
