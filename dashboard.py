@@ -4,10 +4,10 @@ import holoviews as hv
 import pandas as pd
 from components.table import Table
 from components.Heatmap import Heatmap
-
+from config import DATA_PATH
 pn.extension(sizing_mode = 'stretch_width')
 vanilla = pn.template.VanillaTemplate(title='Vanilla Template')
-df_data = pd.read_csv("data/StudentsPerformance.csv")
+df_data = pd.read_csv(DATA_PATH)
 df_data['total score (%)'] = round((df_data['math score']+df_data['reading score']+df_data['writing score']) / 3, 1)
 vanilla.main.append(Table(df_data))
 
