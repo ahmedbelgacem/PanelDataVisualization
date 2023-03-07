@@ -6,7 +6,9 @@ from components.table import Table
 
 pn.extension(sizing_mode = 'stretch_width')
 vanilla = pn.template.VanillaTemplate(title='Vanilla Template')
-
+df_data = pd.read_csv("data/StudentsPerformance.csv")
+df_data['total score (%)'] = round((df_data['math score']+df_data['reading score']+df_data['writing score']) / 3, 1)
+table = hv.Table(df_data)
 
 xs = np.linspace(0, np.pi)
 freq = pn.widgets.FloatSlider(name="Frequency", start=0, end=10, value=2)
