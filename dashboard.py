@@ -4,7 +4,7 @@ import holoviews as hv
 import pandas as pd
 
 pn.extension(sizing_mode = 'stretch_width')
-vanilla = pn.template.VanillaTemplate(title='Vanilla Template')
+vanilla = pn.template.VanillaTemplate(title='Student Performance in Exams - Exploratory Data Analysis')
 df_data = pd.read_csv("data/StudentsPerformance.csv")
 df_data['total score (%)'] = round((df_data['math score']+df_data['reading score']+df_data['writing score']) / 3, 1)
 table = hv.Table(df_data)
