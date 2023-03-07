@@ -1,7 +1,8 @@
 bleach==6.0.0
 bokeh==2.4.3
-certifi==2022.12.7
+certifi @ file:///C:/b/abs_85o_6fm0se/croot/certifi_1671487778835/work/certifi
 charset-normalizer==3.1.0
+colorama==0.4.6
 colorcet==3.0.1
 contourpy==1.0.7
 cycler==0.11.0
@@ -25,6 +26,7 @@ Pillow==9.4.0
 pyct==0.5.0
 pyparsing==3.0.9
 python-dateutil==2.8.2
+python-dotenv==1.0.0
 pytz==2022.7.1
 pyviz-comms==2.2.1
 PyYAML==6.0
@@ -35,4 +37,5 @@ tqdm==4.65.0
 typing_extensions==4.5.0
 urllib3==1.26.14
 webencodings==0.5.1
+wincertstore==0.2
 zipp==3.15.0
