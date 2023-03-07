@@ -17,7 +17,7 @@ summary = df_data.describe().T[["min","mean","75%","max"]]\
                 "max": "maximum_score"}).astype(int)
 index = ["math score", "reading score", "writing score", "total score (%)"]
 summary_df = pd.DataFrame(summary, index=index)
-vanilla.main.append(Table(summary_df))
+vanilla.main.append(Table(summary_df,index))
 
 xs = np.linspace(0, np.pi)
 freq = pn.widgets.FloatSlider(name="Frequency", start=0, end=10, value=2)
