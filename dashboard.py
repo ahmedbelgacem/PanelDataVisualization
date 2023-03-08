@@ -3,8 +3,8 @@ import numpy as np
 import holoviews as hv
 import pandas as pd
 from components.table import Table
-from components.Heatmap import Heatmap
 from config import DATA_PATH
+from components.heatmap import Heatmap
 
 pn.extension(sizing_mode='stretch_width')
 vanilla = pn.template.VanillaTemplate(title='Student Performance in Exams - Explanatory Data Analysis')
@@ -52,9 +52,9 @@ def filtering(race, gender, education, lunch, preparation):
     summary_table.update(new_summary_df)
 
 
-heatmap = pn.Row(
-    pn.Card(Heatmap(df_data), title='Feature Correlation'),
-)
+# heatmap = pn.Row(
+#     pn.Card(Heatmap(df_data), title='Feature Correlation'),
+# )
 
 xs = np.linspace(0, np.pi)
 freq = pn.widgets.FloatSlider(name='Frequency', start=0, end=10, value=2)
@@ -78,10 +78,13 @@ sin_cosine = pn.Row(
     pn.Card(hv.DynamicMap(cosine), title='Cosine')
 )
 
+heatmap = Heatmap(df_data)
+print(heatmap)
+
 panels = [
     data_table.widget,
     summary_table.widget,
-    heatmap,
+    heatmap.fig,
     sin_cosine
 ]
 widgets = [
