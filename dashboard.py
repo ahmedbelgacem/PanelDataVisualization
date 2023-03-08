@@ -16,7 +16,7 @@ columns = ['Gender', 'Race/Ethnicity', 'Parental level education', 'Lunch', 'Tes
            'Math score (%)', 'Reading score (%)', 'Writing score (%)', 'Total score (%)']
 summary_index = ['math score', 'reading score', 'writing score', 'total score (%)']
 data_table = Table(df_data, index=list(range(len(df_data))),
-                   columns=columns)
+                   columns=columns, page_size = 10)
 # This selector is used to filter on race/ethnicity and gender
 race_select = pn.widgets.Select(name="race/ethnicity", options=['All', 'A', 'B', 'C', 'D', 'E'])
 gender_select = pn.widgets.Select(name="gender", options=['All', 'male', 'female'])
@@ -79,8 +79,8 @@ sin_cosine = pn.Row(
 )
 
 panels = [
-    data_table.figure,
-    summary_table.figure,
+    data_table.widget,
+    summary_table.widget,
     heatmap,
     sin_cosine
 ]
