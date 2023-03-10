@@ -18,7 +18,7 @@ class Indicator():
         mode = 'number',
         value = percentages[1],
         domain = {'row': 0, 'column': 1},
-        title = {'text': 'Mediocre', 'font_family': 'montserrat', 'font_color': 'black', 'font_size': 20},
+        title = {'text': 'Mediocrity', 'font_family': 'montserrat', 'font_color': 'black', 'font_size': 20},
         number = {'font_color' : '#ff7400', 'font_size': 60, 'suffix': '%', 'font_family': 'montserrat'},
       )
       

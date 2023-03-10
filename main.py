@@ -2,9 +2,9 @@ import panel as pn
 from utils.utils import read_csv, summarize
 from components import PlotlyTable, Heatmap, Indicator
 
-pn.extension(sizing_mode = 'stretch_width') # Responsiveness
-with open('templates/template.jinja2', 'r') as html:
-  template = pn.Template('\n'.join(html.readlines())) # Using pre-existing template
+pn.extension(sizing_mode = 'stretch_width')
+with open('templates/dashboard.jinja2', 'r') as html:
+  template = pn.Template('\n'.join(html.readlines()))
 template.add_variable('app_title', 'Dashboard')
 
 
