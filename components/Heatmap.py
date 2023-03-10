@@ -15,31 +15,32 @@ class Heatmap():
         y = self.corr.columns,
         z = self.corr.values,
         type = 'heatmap',
-        colorscale = 'greens',
+        colorscale = 'blues',
         text = np.round(self.corr.values, 2),
         texttemplate = '%{text}',
-        textfont = {'size': 15},
+        textfont = {'size': 12, 'family': 'montserrat'},
         zmin = 0,
         zmax = 1,
         showscale = False,
         hovertemplate = '%{z}<extra></extra>',
         hoverlabel = dict(
-          bgcolor = 'green',
-          font_size = 20
+          bgcolor = 'rgba(49, 99, 149, 1.)',
+          font_size = 12,
+          font_family = 'montserrat'
         )
       ),
     )
     self.fig.update_layout(
       title = 'Correlation Map',
-      title_font = {'size': 30},
-      width = 1400,
-      height = 800,
+      title_font = {'size': 20, 'family': 'montserrat'},
+      width = 1000,
+      height = 600,
       yaxis = dict(
-        tickfont = dict(size = 20),
+        tickfont = dict(size = 12, family = 'montserrat'),
         tickangle = 0
       ),
       xaxis = dict(
-        tickfont = dict(size = 20),
+        tickfont = dict(size = 12, family = 'montserrat'),
       ),
     )
     for i in range(len(self.fig.layout.annotations)):

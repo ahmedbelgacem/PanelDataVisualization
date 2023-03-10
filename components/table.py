@@ -1,6 +1,7 @@
 import panel as pn
 from panel.widgets import Tabulator
 import pandas as pd
+import plotly.graph_objects as go
 
 
 class Table():
@@ -24,30 +25,38 @@ class Table():
     
   def update(self, df: pd.DataFrame):
     self.widget.value = df
-# class Table():
-#     def __init__(self, data: pd.DataFrame, index: list = None, columns: list = None):
-#         self.data = data
-#         self.index = index
-#         self.columns = columns
-#         if self.index is not None:
-#             self.data = self.data.set_index(pd.Index(self.index))
-#         self.data.insert(0, '', index)
 
-#         if self.columns is not None and len(self.columns) != (len(self.data.columns) - 1):
-#             raise ValueError('columns length is {}, while data has {} columns'.format(len(columns), len(data.columns) - 1))
-#         if self.columns: self.columns = [''] + self.columns
-
-#         print(len(self.data.columns), len(self.columns))
-#         # print({self.data.columns[i]: (self.columns[i] if self.columns else self.data.columns[i]) for i in range(len(self.data.columns))})
-#         self.figure = Tabulator(
-#             data,
-#             layout='fit_data_fill',
-#             page_size=10,
-#             show_index=False,
-#             titles={self.data.columns[i]: (self.columns[i] if self.columns else self.data.columns[i]) for i in range(len(self.data.columns))},
-#         )
-
-#     def update(self, df):
-#         self.figure.value = df
-
-
+class PlotlyTable():
+  def __init__(self, df: pd.DataFrame, header: list = None, **kwargs) -> None:
+    header_vals = header if header else list(df.columns)
+    header_vals = [f'<b>{col}' for col in header_vals]
+    df.iloc[:, 0] = df.iloc[:, 0].apply(lambda v: f'<b>{v}')
+    self.fig = go.Figure(
+      data = [ go.Table(
+        header = dict(
+          values = header_vals,
+          fill_color='rgba(49, 99, 149, 1.)',
+          align = 'left',
+          font = dict(color = 'white', size = 12),
+        ),
+        cells = dict(
+          values = [df[col] for col in df.columns],
+          align = 'left',
+          font = dict(size = 12, color = ['white', 'black'], family = 'montserrat'),
+          height = 30,
+          fill = dict(color = ['rgba(49, 99, 149, 1.)', 'rgba(49, 99, 149, .2)']),
+        )
+      )
+    ])
+    self.fig.update_layout(
+      **kwargs,
+      title_font = {'size': 20, 'color': 'black', 'family': 'montserrat'},
+      paper_bgcolor = 'rgba(0,0,0,0)',
+      plot_bgcolor = 'rgba(0,0,0,0)',
+    )
+    
+  def update(self, df):
+    self.fig.update_traces(
+      header = dict(values = list(df.columns)),
+      cells = dict(values = [df[col] for col in df.columns]),
+    )

@@ -1,7 +1,7 @@
 import panel as pn
 import numpy as np
 import holoviews as hv
-from components.table import Table
+from components.table import Table, PlotlyTable
 from components.heatmap import Heatmap
 from config import DATA_PATH, DF_COLUMNS, SUMMARY_INDEX, SUMMARY_COLUMNS
 from utils.utils import data_preprocessing, summary, filter_data
@@ -10,10 +10,12 @@ pn.extension(sizing_mode='stretch_width')
 vanilla = pn.template.VanillaTemplate(title='Student Performance in Exams - Explanatory Data Analysis')
 pn.widgets.Tabulator.theme = 'materialize'
 
-df_data = data_preprocessing(DATA_PATH)
-data_table = Table(df_data, columns=DF_COLUMNS)
+df_data = data_preprocessing(DATA_PATH).reset_index(names = '')
+# data_table = Table(df_data, columns=DF_COLUMNS)
+data_table_ = PlotlyTable(df_data, header = [''] + DF_COLUMNS, title = 'Dataset Exploration', width = 1500, height = 800)
 summary_df = summary(df_data, SUMMARY_INDEX)
-summary_table = Table(summary_df, SUMMARY_INDEX, columns=SUMMARY_COLUMNS)
+# summary_table = Table(summary_df, SUMMARY_INDEX, columns=SUMMARY_COLUMNS)
+summary_table_ = PlotlyTable(summary_df.reset_index(), header = [''] + SUMMARY_COLUMNS, title = 'Dataset Summary', width = 800, height = 400)
 
 # This selector is used to filter on race/ethnicity and gender
 race_select = pn.widgets.Select(name="race/ethnicity", options=['All', 'A', 'B', 'C', 'D', 'E'])
@@ -43,8 +45,9 @@ def filtering(race, gender, education, lunch, preparation):
         df_new = filter_data(df_new, 'test preparation course',
                         f"{preparation}")  # df_new[df_data['test preparation course'] == f"{preparation}"]
     new_summary_df = summary(df_new, SUMMARY_INDEX)
-    data_table.update(df_new)
-    summary_table.update(new_summary_df)
+    # data_table.update(df_new)
+    data_table_.update(df_new)
+    # summary_table.update(new_summary_df)
 
 
 # heatmap = pn.Row(
@@ -77,8 +80,10 @@ heatmap = Heatmap(df_data)
 print(heatmap)
 
 panels = [
-    data_table.widget,
-    summary_table.widget,
+    data_table_.fig,
+    # data_table.widget,
+    summary_table_.fig,
+    # summary_table.widget,
     heatmap.fig,
     sin_cosine
 ]
