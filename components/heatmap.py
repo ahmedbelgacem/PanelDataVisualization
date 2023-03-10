@@ -32,7 +32,7 @@ class Heatmap():
     )
     self.fig.update_layout(
       title = 'Correlation Map',
-      title_font = {'size': 20, 'family': 'montserrat', 'color': 'black'},
+      title_font = {'size': 20, 'family': 'montserrat'},
       width = 1000,
       height = 600,
       yaxis = dict(
