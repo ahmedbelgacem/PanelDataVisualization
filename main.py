@@ -1,6 +1,6 @@
 import panel as pn
 from utils.utils import read_csv, summarize
-from components import PlotlyTable, Heatmap, Indicator
+from components import PlotlyTable, Heatmap, Indicator, CountPlot
 
 pn.extension(sizing_mode = 'stretch_width')
 with open('templates/dashboard.jinja2', 'r') as html:
@@ -15,6 +15,7 @@ table = PlotlyTable(dataset.reset_index(names = ''), title = 'Dataset Exploratio
 summary_table = PlotlyTable(summary.reset_index(names = ''), title = 'Dataset Summary', width = 800, height = 400) # Resetting index to display it as a column
 heatmap = Heatmap(dataset)
 indicator = Indicator(dataset, width = 650, height = 300)
+countplot = CountPlot(dataset, height = 600)
 
 selectors_dict = {
   'Race/Ethnicity': ['All'] + dataset['Race/Ethnicity'].unique().tolist(),
@@ -54,5 +55,5 @@ template.add_panel('table', table.fig)
 template.add_panel('summary', summary_table.fig)
 template.add_panel('indicator', indicator.fig)
 template.add_panel('heatmap', heatmap.fig)
-# template.add_panel('main', pn.Column(*panels, css_classes = '!bg-white'.split()))
+template.add_panel('countplot', countplot.fig)
 template.servable()

@@ -35,8 +35,13 @@
       {{ embed(roots.indicator) }}
     </div>
   </div>
-  <div class = 'w-[1010px] h-[610px] bg-white rounded-lg mx-12 my-6 drop-shadow-sm'>
-    {{ embed(roots.heatmap) }}
+  <div class = 'flex items-center justify-between w-auto mx-12 my-6'>
+    <div class = 'w-[1010px] h-[610px] bg-white rounded-lg drop-shadow-sm'>
+      {{ embed(roots.heatmap) }}
+    </div>
+    <div class = 'w-[450px] h-[610px] bg-white rounded-lg drop-shadow-sm'>
+      {{ embed(roots.countplot) }}
+    </div>
   </div>
 </div>
 {% endblock %}
