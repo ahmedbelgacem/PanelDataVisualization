@@ -10,12 +10,11 @@ template.add_variable('app_title', 'Dashboard')
 
 dataset = read_csv('data/StudentsPerformance.csv')
 summary = summarize(dataset)
-indicator_vals = [int(dataset['Total score (%)'].between(70, 100).sum()*100/len(dataset)), int(dataset['Total score (%)'].between(50, 70).sum()*100/len(dataset)), int(dataset['Total score (%)'].between(0, 50).sum()*100/len(dataset))]
 
 table = PlotlyTable(dataset.reset_index(names = ''), title = 'Dataset Exploration', width = 1500, height = 600) # Resetting index to display it as a column
 summary_table = PlotlyTable(summary.reset_index(names = ''), title = 'Dataset Summary', width = 800, height = 400) # Resetting index to display it as a column
 heatmap = Heatmap(dataset)
-indicator = Indicator(indicator_vals, width = 650, height = 300)
+indicator = Indicator(dataset, width = 650, height = 300)
 
 selectors_dict = {
   'Race/Ethnicity': ['All'] + dataset['Race/Ethnicity'].unique().tolist(),
@@ -43,7 +42,12 @@ def filter(*selectors):
   subset = subset[subset['Parental level education'] == selectors[2]] if selectors[2] != 'All' else subset
   subset = subset[subset['Lunch'] == selectors[3]] if selectors[3] != 'All' else subset
   subset = subset[subset['Test prep. course'] == selectors[4]] if selectors[4] != 'All' else subset
+
+  summary = summarize(subset)
+  
   table.update(subset.reset_index(names = ''))
+  summary_table.update(summary.reset_index(names = ''))
+  indicator.update(subset)
 
 template.add_panel('sidebar', pn.Column(*widgets, css_classes = ''.split()))
 template.add_panel('table', table.fig)
