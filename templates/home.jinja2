@@ -5,22 +5,6 @@
 <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
 <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap' rel='stylesheet'>
 <script src='https://cdn.tailwindcss.com'></script>
-<style>
-  .modebar {
-    display: none !important;
-  }
-  label {
-    font-family: 'montserrat' !important;
-    font-size: 16px !important;
-  }
-  select {
-    font-family: 'montserrat' !important;
-    font-size: 16px !important;
-    margin-top: 10px !important;
-    margin-bottom: 10px !important;
-    height: 30px !important;
-  }
-</style>
 {% endblock %}
 
 <!-- goes in body -->
@@ -28,8 +12,8 @@
 <div class = 'flex flex-col w-screen min-h-screen bg-[#316395]/5 pl-72 pt-20' style = 'font-family: montserrat;'>
   <div class = 'fixed inset-0 flex items-center justify-between w-screen h-20 z-50 bg-white px-12 drop-shadow-sm'>
     <span class = 'flex items-center'>
-      <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='#316395' class = 'w-6 h-6 mr-4'>
-        <path stroke-linecap='round' stroke-linejoin='round' d='M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z' />
+      <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='#316395' class='w-6 h-6 mr-4'>
+        <path stroke-linecap='round' stroke-linejoin='round' d='M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25' />
       </svg>
       <h1 class = 'font-bold text-2xl text-[#316395]'>{{ app_title }}</h1>
     </span>
@@ -55,36 +39,6 @@
         <p class = 'text-xl text-[#316395]'>Machine Learning</p>
       </a>
     </span>
-  </div>
-  <div class = 'fixed left-0 top-20 w-72 h-screen bg-white z-50 drop-shadow-sm pt-12'>
-    {{ embed(roots.sidebar) }}
-  </div>
-  <div class = 'w-auto h-[570px] bg-white rounded-lg m-12 mb-6 drop-shadow-sm'>
-    {{ embed(roots.table) }}
-  </div>
-  <div class = 'flex items-center justify-between w-auto mx-12 my-6'>
-    <div class = 'w-[800px] h-[400px] bg-white rounded-lg drop-shadow-sm'>
-      {{ embed(roots.summary) }}
-    </div>
-    <div class = 'w-[652px] h-[400px] bg-white rounded-lg drop-shadow-sm'>
-      {{ embed(roots.indicator) }}
-    </div>
-  </div>
-  <div class = 'flex items-center justify-between w-auto mx-12 my-6'>
-    <div class = 'w-[1010px] h-[610px] bg-white rounded-lg drop-shadow-sm'>
-      {{ embed(roots.heatmap) }}
-    </div>
-    <div class = 'w-[450px] h-[610px] bg-white rounded-lg drop-shadow-sm'>
-      {{ embed(roots.genderplot) }}
-    </div>
-  </div>
-  <div class = 'flex items-center justify-between w-auto mx-12 my-6'>
-    <div class = 'w-[800px] h-[450px] bg-white rounded-lg drop-shadow-sm'>
-      {{ embed(roots.umap) }}
-    </div>
-    <div class = 'w-[660px] h-[450px] bg-white rounded-lg drop-shadow-sm'>
-      {{ embed(roots.grouplot) }}
-    </div>
   </div>
 </div>
 {% endblock %}
