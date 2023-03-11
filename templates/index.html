@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel='preconnect' href='https://fonts.googleapis.com'>
+  <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+  <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap' rel='stylesheet'>
+  <script src='https://cdn.tailwindcss.com'></script>
+</head>
+<body>
+  <div class = 'relative flex flex-col items-center justify-center w-screen h-screen bg-[#316395]/5 pt-20' style = 'font-family: montserrat;'>
+    <div class = 'fixed inset-0 flex items-center justify-between w-screen h-20 z-50 bg-white px-12 drop-shadow-sm'>
+      <span class = 'flex items-center'>
+        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='#316395' class='w-6 h-6 mr-4'>
+          <path stroke-linecap='round' stroke-linejoin='round' d='M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25' />
+        </svg>
+        <h1 class = 'font-bold text-2xl text-[#316395]'>Home</h1>
+      </span>
+      <span class = 'flex items-center space-x-5'>
+        <a class = 'flex items-center space-x-2 cursor-pointer' href = '/'>
+          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='#316395' class='w-6 h-6'>
+            <path stroke-linecap='round' stroke-linejoin='round' d='M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25' />
+          </svg>
+          <p class = 'text-xl text-[#316395]'>Home</p>
+        </a>
+        <div class='h-4 w-px bg-[#316395]'></div>
+        <a class = 'flex items-center space-x-2 cursor-pointer' href = '/dashboard'>
+          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='#316395' class = 'w-6 h-6'>
+            <path stroke-linecap='round' stroke-linejoin='round' d='M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z' />
+          </svg>
+          <p class = 'text-xl text-[#316395]'>Dashboard</p>
+        </a>
+        <div class='h-4 w-px bg-[#316395]'></div>
+        <a class = 'flex items-center space-x-2 cursor-pointer' href = '/ai'>
+          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='#316395' class='w-6 h-6'>
+            <path stroke-linecap='round' stroke-linejoin='round' d='M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z' />
+          </svg>
+          <p class = 'text-xl text-[#316395]'>Machine Learning</p>
+        </a>
+      </span>
+    </div>
+    <h1 class = 'font-bold text-5xl text-[#316395]'>Data Visualisation with Panel & Plotly</h1>
+    <p class = 'text-xl text-[#316395] mt-12 w-1/2 text-center'><b>Panel</b> is an open-source Python library that lets you create custom interactive web apps and dashboards by connecting user-defined widgets to plots, images, tables, or text.</p>
+    <p class = 'text-xl text-[#316395] mt-2 w-1/2 text-center'>With roots in the open-source community and worldwide customers, <b>Plotly</b> is a category-defining leader in enabling data-driven decisions via data apps.</p>
+    <span class = 'flex items-center justify-between w-1/4 mt-12'>
+      <a class = 'flex items-center justify-center border-[#316395] border-[1px] rounded-xl h-16 w-52 text-[#316395] text-lg font-semibold hover:scale-110 duration-200 cursor-pointer' href = '/dashboard'>
+        <p>Dashboard</p>
+      </a>
+      <a class = 'flex items-center justify-center border-[#316395] border-[1px] rounded-xl h-16 w-52 text-[#316395] text-lg font-semibold hover:scale-110 duration-200 cursor-pointer' href = '/ai'>
+        <p>Machine Learning</p>
+      </a>
+    </span>
+    <p class = 'absolute right-4 bottom-4 text-[#316395] text-lg'>This project was elaborated by <b>Nizar Masmoudi</b>, <b>Ahmed Belgacem</b> and <b>Feriel Garouachi</b></p>
+  </div>
+</body>
+</html>
