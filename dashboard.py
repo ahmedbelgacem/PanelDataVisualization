@@ -15,12 +15,13 @@ table = PlotlyTable(dataset.reset_index(names = ''), title = 'Dataset Exploratio
 summary_table = PlotlyTable(summary.reset_index(names = ''), title = 'Dataset Summary', width = 800, height = 400) # Resetting index to display it as a column
 heatmap = Heatmap(dataset)
 indicator = Indicator(dataset, width = 650, height = 400)
-countplot = CountPlot(dataset, height = 600)
+genderplot = CountPlot(dataset, height = 600, column = 'Gender', ticktext = ['Female', 'Male'], colors = ['#ef553b', '#636efa'], title = 'Gender Distribution')
 umaplot = UMAPlot(dataset, title = 'UMAP Representation', width = 750)
 boxplot = BoxPlot(dataset, title = 'Score Distribution Summary')
+grouplot = CountPlot(dataset, height = 450, column = 'Race/Ethnicity', ticktext = ['Group A', 'Group B', 'Group C', 'Group D', 'Group E'], title = 'Race/Ethnicity Distribution')
 
 selectors_dict = {
-  'Race/Ethnicity': ['All'] + dataset['Race/Ethnicity'].unique().tolist(),
+  'Race/Ethnicity': ['All'] + list(sorted(dataset['Race/Ethnicity'].unique().tolist())),
   'Gender': ['All'] + dataset['Gender'].unique().tolist(),
   'Parental level education': ['All'] + dataset['Parental level education'].unique().tolist(),
   'Lunch': ['All'] + dataset['Lunch'].unique().tolist(),
@@ -52,8 +53,8 @@ template.add_panel('table', table.fig)
 # template.add_panel('summary', summary_table.fig)
 template.add_panel('indicator', indicator.fig)
 template.add_panel('heatmap', heatmap.fig)
-template.add_panel('countplot', countplot.fig)
+template.add_panel('genderplot', genderplot.fig)
 template.add_panel('umap', umaplot.fig)
 template.add_panel('summary', boxplot.fig)
-template.add_panel('boxplot', None)
+template.add_panel('grouplot', grouplot.fig)
 template.servable()
