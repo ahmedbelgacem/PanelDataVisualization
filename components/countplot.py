@@ -10,7 +10,7 @@ class CountPlot():
         y = count.values,
         text = list(count.values),
         hovertemplate = '%{x} - %{y}<extra></extra>',
-        marker_color = ['#ff7400', '#316395'],
+        marker_color = ['#ef553b', '#636efa'],
       )
     )
     self.fig.update_layout(

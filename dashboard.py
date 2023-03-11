@@ -1,6 +1,6 @@
 import panel as pn
 from utils.utils import read_csv, summarize
-from components import PlotlyTable, Heatmap, Indicator, CountPlot, UMAPlot
+from components import PlotlyTable, Heatmap, Indicator, CountPlot, UMAPlot, BoxPlot
 
 pn.extension(sizing_mode = 'stretch_width')
 with open('templates/dashboard.jinja2', 'r') as html:
@@ -14,9 +14,10 @@ summary = summarize(dataset)
 table = PlotlyTable(dataset.reset_index(names = ''), title = 'Dataset Exploration', width = 1500, height = 600) # Resetting index to display it as a column
 summary_table = PlotlyTable(summary.reset_index(names = ''), title = 'Dataset Summary', width = 800, height = 400) # Resetting index to display it as a column
 heatmap = Heatmap(dataset)
-indicator = Indicator(dataset, width = 650, height = 300)
+indicator = Indicator(dataset, width = 650, height = 400)
 countplot = CountPlot(dataset, height = 600)
-umaplot = UMAPlot(dataset, title = 'UMAP Representation')
+umaplot = UMAPlot(dataset, title = 'UMAP Representation', width = 750)
+boxplot = BoxPlot(dataset, title = 'Score Distribution Summary')
 
 selectors_dict = {
   'Race/Ethnicity': ['All'] + dataset['Race/Ethnicity'].unique().tolist(),
@@ -48,9 +49,11 @@ def filter(*selectors):
 
 template.add_panel('sidebar', pn.Column(*widgets, css_classes = ''.split()))
 template.add_panel('table', table.fig)
-template.add_panel('summary', summary_table.fig)
+# template.add_panel('summary', summary_table.fig)
 template.add_panel('indicator', indicator.fig)
 template.add_panel('heatmap', heatmap.fig)
 template.add_panel('countplot', countplot.fig)
 template.add_panel('umap', umaplot.fig)
+template.add_panel('summary', boxplot.fig)
+template.add_panel('boxplot', None)
 template.servable()

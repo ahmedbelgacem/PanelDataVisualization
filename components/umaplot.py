@@ -38,7 +38,7 @@ class UMAPlot():
         ),
         marker = dict(
           color = df_enc['Total score (%)'],
-          size = 10,
+          size = 8,
           colorscale = 'greens',
           showscale = True,
         ),

@@ -21,7 +21,7 @@ class Indicator():
         name = 'mediocrity',
         mode = 'number',
         value = values[1],
-        domain = {'row': 0, 'column': 1},
+        domain = {'row': 0, 'column': 2},
         title = {'text': 'Mediocrity', 'font_family': 'montserrat', 'font_color': 'black', 'font_size': 20},
         number = {'font_color' : '#ff7400', 'font_size': 60, 'suffix': '%', 'font_family': 'montserrat'},
       )
@@ -32,7 +32,7 @@ class Indicator():
         name = 'failure',
         mode = 'number',
         value = values[2],
-        domain = {'row': 0, 'column': 2},
+        domain = {'row': 1, 'column': 3},
         title = {'text': 'Failure', 'font_family': 'montserrat', 'font_color': 'black', 'font_size': 20},
         number = {'font_color' : '#ff4136', 'font_size': 60, 'suffix': '%', 'font_family': 'montserrat'},
       )
@@ -40,7 +40,7 @@ class Indicator():
     )
     self.fig.update_layout(
       **kwargs,
-      grid = {'rows': 1, 'columns': 3, 'pattern': 'independent'},
+      grid = {'rows': 2, 'columns': 3, 'pattern': 'independent'},
       paper_bgcolor = 'rgba(0,0,0,0)',
       plot_bgcolor = 'rgba(0,0,0,0)',
     )
