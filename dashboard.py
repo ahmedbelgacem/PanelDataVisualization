@@ -1,102 +1,56 @@
 import panel as pn
-import numpy as np
-import holoviews as hv
-from components.table import Table, PlotlyTable
-from components.heatmap import Heatmap
-from config import DATA_PATH, DF_COLUMNS, SUMMARY_INDEX, SUMMARY_COLUMNS
-from utils.utils import data_preprocessing, summary, filter_data
+from utils.utils import read_csv, summarize
+from components import PlotlyTable, Heatmap, Indicator, CountPlot, UMAPlot
 
-pn.extension(sizing_mode='stretch_width')
-vanilla = pn.template.VanillaTemplate(title='Student Performance in Exams - Explanatory Data Analysis')
-pn.widgets.Tabulator.theme = 'materialize'
-
-df_data = data_preprocessing(DATA_PATH).reset_index(names = '')
-# data_table = Table(df_data, columns=DF_COLUMNS)
-data_table_ = PlotlyTable(df_data, header = [''] + DF_COLUMNS, title = 'Dataset Exploration', width = 1500, height = 800)
-summary_df = summary(df_data, SUMMARY_INDEX)
-# summary_table = Table(summary_df, SUMMARY_INDEX, columns=SUMMARY_COLUMNS)
-summary_table_ = PlotlyTable(summary_df.reset_index(), header = [''] + SUMMARY_COLUMNS, title = 'Dataset Summary', width = 800, height = 400)
-
-# This selector is used to filter on race/ethnicity and gender
-race_select = pn.widgets.Select(name="race/ethnicity", options=['All', 'A', 'B', 'C', 'D', 'E'])
-gender_select = pn.widgets.Select(name="gender", options=['All', 'male', 'female'])
-education_select = pn.widgets.Select(name="education",
-                                     options=['All', "bachelor's degree", 'some college', "master's degree",
-                                              "associate's degree", 'high school', 'some high school'])
-lunch_select = pn.widgets.Select(name="lunch", options=['All', 'standard', 'free/reduced'])
-preparation_select = pn.widgets.Select(name="preparation", options=['All', 'none', 'completed'])
+pn.extension(sizing_mode = 'stretch_width')
+with open('templates/dashboard.jinja2', 'r') as html:
+  template = pn.Template('\n'.join(html.readlines()))
+template.add_variable('app_title', 'Dashboard')
 
 
-@pn.depends(race=race_select, gender=gender_select, education=education_select, lunch=lunch_select,
-            preparation=preparation_select, watch=True)
-def filtering(race, gender, education, lunch, preparation):
-    df_new = df_data
-    if race != 'All':
-        df_new = filter_data(df_new, 'race/ethnicity',
-                        f"group {race}")  # df_new[df_data['race/ethnicity'] == f"group {race}"]
-    if gender != 'All':
-        df_new = filter_data(df_new, 'gender', f"{gender}")  # df_new[df_data['gender'] == f"{gender}"]
-    if education != 'All':
-        df_new = filter_data(df_new, 'parental level of education',
-                        f"{education}")  # df_new[df_data['parental level of education'] == f"{education}"]
-    if lunch != 'All':
-        df_new = filter_data(df_new, 'lunch', f"{lunch}")  # df_new[df_data['lunch'] == f"{lunch}"]
-    if preparation != 'All':
-        df_new = filter_data(df_new, 'test preparation course',
-                        f"{preparation}")  # df_new[df_data['test preparation course'] == f"{preparation}"]
-    new_summary_df = summary(df_new, SUMMARY_INDEX)
-    # data_table.update(df_new)
-    data_table_.update(df_new)
-    # summary_table.update(new_summary_df)
+dataset = read_csv('data/StudentsPerformance.csv')
+summary = summarize(dataset)
 
+table = PlotlyTable(dataset.reset_index(names = ''), title = 'Dataset Exploration', width = 1500, height = 600) # Resetting index to display it as a column
+summary_table = PlotlyTable(summary.reset_index(names = ''), title = 'Dataset Summary', width = 800, height = 400) # Resetting index to display it as a column
+heatmap = Heatmap(dataset)
+indicator = Indicator(dataset, width = 650, height = 300)
+countplot = CountPlot(dataset, height = 600)
+umaplot = UMAPlot(dataset, title = 'UMAP Representation')
 
-# heatmap = pn.Row(
-#     pn.Card(Heatmap(df_data), title='Feature Correlation'),
-# )
+selectors_dict = {
+  'Race/Ethnicity': ['All'] + dataset['Race/Ethnicity'].unique().tolist(),
+  'Gender': ['All'] + dataset['Gender'].unique().tolist(),
+  'Parental level education': ['All'] + dataset['Parental level education'].unique().tolist(),
+  'Lunch': ['All'] + dataset['Lunch'].unique().tolist(),
+  'Test prep. course': ['All'] + dataset['Test prep. course'].unique().tolist(),
+}
+selectors = [pn.widgets.Select(name = name, options = options) for name, options in selectors_dict.items()]
 
-xs = np.linspace(0, np.pi)
-freq = pn.widgets.FloatSlider(name='Frequency', start=0, end=10, value=2)
-phase = pn.widgets.FloatSlider(name='Phase', start=0, end=np.pi)
-
-
-@pn.depends(freq=freq, phase=phase)
-def sine(freq, phase):
-    return hv.Curve((xs, np.sin(xs * freq + phase))).opts(
-        responsive=True, min_height=400)
-
-
-@pn.depends(freq=freq, phase=phase)
-def cosine(freq, phase):
-    return hv.Curve((xs, np.cos(xs * freq + phase))).opts(
-        responsive=True, min_height=400)
-
-
-sin_cosine = pn.Row(
-    pn.Card(hv.DynamicMap(sine), title='Sine'),
-    pn.Card(hv.DynamicMap(cosine), title='Cosine')
-)
-
-heatmap = Heatmap(df_data)
-print(heatmap)
-
-panels = [
-    data_table_.fig,
-    # data_table.widget,
-    summary_table_.fig,
-    # summary_table.widget,
-    heatmap.fig,
-    sin_cosine
-]
 widgets = [
-    freq,
-    phase,
-    race_select,
-    gender_select,
-    education_select,
-    lunch_select,
-    preparation_select
+  *selectors,
 ]
 
-vanilla.sidebar.append(pn.Column(*widgets))
-vanilla.main.append(pn.Column(*panels))
-vanilla.servable()
+@pn.depends(*selectors, watch = True)
+def filter(*selectors):
+  subset = dataset.copy()
+  subset = subset[subset['Race/Ethnicity'] == selectors[0]] if selectors[0] != 'All' else subset
+  subset = subset[subset['Gender'] == selectors[1]] if selectors[1] != 'All' else subset
+  subset = subset[subset['Parental level education'] == selectors[2]] if selectors[2] != 'All' else subset
+  subset = subset[subset['Lunch'] == selectors[3]] if selectors[3] != 'All' else subset
+  subset = subset[subset['Test prep. course'] == selectors[4]] if selectors[4] != 'All' else subset
+
+  summary = summarize(subset)
+  
+  table.update(subset.reset_index(names = ''))
+  summary_table.update(summary.reset_index(names = ''))
+  indicator.update(subset)
+
+template.add_panel('sidebar', pn.Column(*widgets, css_classes = ''.split()))
+template.add_panel('table', table.fig)
+template.add_panel('summary', summary_table.fig)
+template.add_panel('indicator', indicator.fig)
+template.add_panel('heatmap', heatmap.fig)
+template.add_panel('countplot', countplot.fig)
+template.add_panel('umap', umaplot.fig)
+template.servable()
