@@ -9,7 +9,7 @@
 
 <!-- goes in body -->
 {% block contents %}
-<div class = 'flex flex-col w-screen min-h-screen bg-[#316395]/5 pl-72 pt-20' style = 'font-family: montserrat;'>
+<div class = 'relative flex flex-col items-center justify-center w-screen h-screen bg-[#316395]/5 pt-20' style = 'font-family: montserrat;'>
   <div class = 'fixed inset-0 flex items-center justify-between w-screen h-20 z-50 bg-white px-12 drop-shadow-sm'>
     <span class = 'flex items-center'>
       <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='#316395' class='w-6 h-6 mr-4'>
@@ -40,5 +40,17 @@
       </a>
     </span>
   </div>
+  <h1 class = 'font-bold text-5xl text-[#316395]'>Data Visualisation with Panel & Plotly</h1>
+  <p class = 'text-xl text-[#316395] mt-12 w-1/2 text-center'><b>Panel</b> is an open-source Python library that lets you create custom interactive web apps and dashboards by connecting user-defined widgets to plots, images, tables, or text.</p>
+  <p class = 'text-xl text-[#316395] mt-2 w-1/2 text-center'>With roots in the open-source community and worldwide customers, <b>Plotly</b> is a category-defining leader in enabling data-driven decisions via data apps.</p>
+  <span class = 'flex items-center justify-between w-1/4 mt-12'>
+    <a class = 'flex items-center justify-center border-[#316395] border-[1px] rounded-xl h-16 w-52 text-[#316395] text-lg font-semibold hover:scale-110 duration-200 cursor-pointer' href = '/dashboard'>
+      <p>Dashboard</p>
+    </a>
+    <a class = 'flex items-center justify-center border-[#316395] border-[1px] rounded-xl h-16 w-52 text-[#316395] text-lg font-semibold hover:scale-110 duration-200 cursor-pointer' href = '/ai'>
+      <p>Machine Learning</p>
+    </a>
+  </span>
+  <p class = 'absolute right-4 bottom-4 text-[#316395] text-lg'>This project was elaborated by <b>Nizar Masmoudi</b>, <b>Ahmed Belgacem</b> and <b>Feriel Garouachi</b></p>
 </div>
 {% endblock %}
