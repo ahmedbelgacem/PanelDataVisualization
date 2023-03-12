@@ -5,6 +5,36 @@
 <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
 <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap' rel='stylesheet'>
 <script src='https://cdn.tailwindcss.com'></script>
+<style>
+  .modebar {
+    display: none !important;
+  }
+  label, .bk-slider-title {
+    font-family: 'montserrat' !important;
+    font-size: 16px !important;
+  }
+  select {
+    font-family: 'montserrat' !important;
+    font-size: 16px !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+    height: 30px !important;
+  }
+  .bk.noUi-target.noUi-ltr.noUi-horizontal.noUi-txt-dir-ltr {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+  }
+  .bk-root .noUi-target {
+    background-color: rgba(49, 99, 149, .1) !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  .bk-root .noUi-handle {
+    background-color: rgba(49, 99, 149, 1) !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+</style>
 {% endblock %}
 
 <!-- goes in body -->
@@ -39,6 +69,15 @@
         <p class = 'text-xl text-[#316395]'>Machine Learning</p>
       </a>
     </span>
+  </div>
+  <div class = 'fixed left-0 top-20 w-72 h-screen bg-white z-50 drop-shadow-sm pt-12'>
+    {{ embed(roots.sidebar) }}
+  </div>
+  <div class = 'w-[1000px] h-[450px] bg-white rounded-lg m-12 mb-6 drop-shadow-sm'>
+    {{ embed(roots.clusterplot) }}
+    <div class = 'absolute top-4 right-4 flex items-center justify-center w-12 h-12'>
+      {{ embed(roots.spinner) }}
+    </div>
   </div>
 </div>
 {% endblock %}
