@@ -12,7 +12,7 @@ dataset = read_csv('data/StudentsPerformance.csv')
 summary = summarize(dataset)
 
 table = PlotlyTable(dataset.reset_index(names = ''), title = 'Dataset Exploration', width = 1500, height = 600) # Resetting index to display it as a column
-summary_table = PlotlyTable(summary.reset_index(names = ''), title = 'Dataset Summary', width = 800, height = 400) # Resetting index to display it as a column
+# summary_table = PlotlyTable(summary.reset_index(names = ''), title = 'Dataset Summary', width = 800, height = 400) # Resetting index to display it as a column
 heatmap = Heatmap(dataset)
 indicator = Indicator(dataset, width = 650, height = 400)
 genderplot = CountPlot(dataset, height = 600, column = 'Gender', ticktext = ['Female', 'Male'], colors = ['#ef553b', '#636efa'], title = 'Gender Distribution')
@@ -54,8 +54,9 @@ def filter(*selectors):
   summary = summarize(subset)
   
   table.update(subset.reset_index(names = ''))
-  summary_table.update(summary.reset_index(names = ''))
+  # summary_table.update(summary.reset_index(names = ''))
   indicator.update(subset)
+  boxplot.update(subset)
   
 @pn.depends(button, watch = True)
 def filter_umap(button):

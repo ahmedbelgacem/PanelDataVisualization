@@ -43,6 +43,7 @@ class BoxPlot():
     for i, col in enumerate(['Math score (%)', 'Writing score (%)', 'Reading score (%)']):
       for q in [0, .25, .5, .75, 1]:
         self.fig.add_annotation(
+          name = '{} - {}'.format(col, q),
           x = df[col].quantile(q), 
           y = i + .4,
           text = '{}'.format(df[col].quantile(q)),
@@ -51,4 +52,25 @@ class BoxPlot():
             color = (i == 0)*'#636efa' + (i == 1)*'#ef553b' + (i == 2)*'#00cc96',
             size = 12
           ),
+        )
+  def update(self, df: pd.DataFrame):
+    self.fig.update_traces(
+      x = df['Math score (%)'],
+      selector = dict(name = 'Math score (%)')
+    )
+    self.fig.update_traces(
+      x = df['Writing score (%)'],
+      selector = dict(name = 'Writing score (%)')
+    )
+    self.fig.update_traces(
+      x = df['Reading score (%)'],
+      selector = dict(name = 'Reading score (%)')
+    )
+    for i, col in enumerate(['Math score (%)', 'Writing score (%)', 'Reading score (%)']):
+      for q in [0, .25, .5, .75, 1]:
+        self.fig.update_annotations(
+          selector = dict(name = '{} - {}'.format(col, q)),
+          x = df[col].quantile(q), 
+          y = i + .4,
+          text = '{}'.format(df[col].quantile(q)),
         )
