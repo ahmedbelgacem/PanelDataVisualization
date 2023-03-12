@@ -30,8 +30,8 @@ selectors_dict = {
 
 selectors = [pn.widgets.Select(name = name, options = options) for name, options in selectors_dict.items()]
 sliders = [
-  pn.widgets.IntSlider(name = 'Number of neighbors', start = 1, end = 20, step = 1, value = 10),
-  pn.widgets.FloatSlider(name = 'Min. distance', start = .01, end = 1, step = 0.01, value = .1)
+  pn.widgets.IntSlider(name = 'Number of neighbors', start = 1, end = 20, step = 1, value = 10, bar_color = '#316395', height = 50),
+  pn.widgets.FloatSlider(name = 'Min. distance', start = .01, end = 1, step = 0.01, value = .1, bar_color = '#316395', height = 50)
 ]
 spinner = pn.indicators.LoadingSpinner(value = True, width = 25, height = 25, bgcolor = 'light', color = 'success', visible = False)
 button = pn.widgets.Button(name = 'Update', button_type = 'primary')
