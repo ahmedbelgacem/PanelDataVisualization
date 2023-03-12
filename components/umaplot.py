@@ -58,3 +58,20 @@ class UMAPlot():
         showticklabels = False
       ),
     )
+  def update(self, df: pd.DataFrame, n_neighbors: int, min_dist: float):
+    le = LabelEncoder()
+    df_enc = df.copy()
+    df_enc['Gender'] = le.fit_transform(df_enc['Gender'])
+    df_enc['Lunch'] = le.fit_transform(df_enc['Lunch'])
+    df_enc['Test prep. course'] = le.fit_transform(df_enc['Test prep. course'])
+    
+    df_enc = pd.get_dummies(df_enc, columns = ['Race/Ethnicity', 'Parental level education'])
+    
+    reducer = umap.UMAP(n_neighbors = n_neighbors, min_dist = min_dist, metric = 'euclidean')
+    X_proj = reducer.fit_transform(df_enc.values)
+    
+    self.fig.update_traces(
+      x = X_proj[:, 0],
+      y = X_proj[:, 1],
+      selector = dict(type = 'scatter')
+    )

@@ -1,5 +1,5 @@
 import panel as pn
-from utils.utils import read_csv
+from utils.dataset import read_csv
 
 pn.extension(sizing_mode = 'stretch_width')
 with open('templates/ai.jinja2', 'r') as html:

@@ -1,5 +1,5 @@
 import panel as pn
-from utils.utils import read_csv, summarize
+from utils.dataset import read_csv, summarize
 from components import PlotlyTable, Heatmap, Indicator, CountPlot, UMAPlot, BoxPlot
 
 pn.extension(sizing_mode = 'stretch_width')
@@ -27,10 +27,19 @@ selectors_dict = {
   'Lunch': ['All'] + dataset['Lunch'].unique().tolist(),
   'Test prep. course': ['All'] + dataset['Test prep. course'].unique().tolist(),
 }
+
 selectors = [pn.widgets.Select(name = name, options = options) for name, options in selectors_dict.items()]
+sliders = [
+  pn.widgets.IntSlider(name = 'Number of neighbors', start = 1, end = 20, step = 1, value = 10),
+  pn.widgets.FloatSlider(name = 'Min. distance', start = .01, end = 1, step = 0.01, value = .1)
+]
+spinner = pn.indicators.LoadingSpinner(value = True, width = 25, height = 25, bgcolor = 'light', color = 'success', visible = False)
+button = pn.widgets.Button(name = 'Update', button_type = 'primary')
 
 widgets = [
   *selectors,
+  *sliders,
+  button,
 ]
 
 @pn.depends(*selectors, watch = True)
@@ -47,6 +56,12 @@ def filter(*selectors):
   table.update(subset.reset_index(names = ''))
   summary_table.update(summary.reset_index(names = ''))
   indicator.update(subset)
+  
+@pn.depends(button, watch = True)
+def filter_umap(button):
+  spinner.visible = True
+  umaplot.update(dataset, sliders[0].value, sliders[1].value)
+  spinner.visible = False
 
 template.add_panel('sidebar', pn.Column(*widgets, css_classes = ''.split()))
 template.add_panel('table', table.fig)
@@ -55,6 +70,7 @@ template.add_panel('indicator', indicator.fig)
 template.add_panel('heatmap', heatmap.fig)
 template.add_panel('genderplot', genderplot.fig)
 template.add_panel('umap', umaplot.fig)
+template.add_panel('spinner', spinner)
 template.add_panel('summary', boxplot.fig)
 template.add_panel('grouplot', grouplot.fig)
 template.servable()
