@@ -21,10 +21,10 @@ This will launch the Panel dashboard in your web browser. The dashboard consists
 
 This page provides an exploratory data analysis (EDA) of the student performance dataset. Users can interact with a variety of visualizations to explore patterns in the data, including:
 
-Box plots of all the target variables
-Histograms of the distribution of each variable
-A correlation heatmap of the variables
-UMAP representation
+-Box plots of all the target variables
+-Histograms of the distribution of each variable
+-A correlation heatmap of the variables
+-UMAP representation
 
 # Machine Learning
 ## Model Building
