@@ -29,7 +29,7 @@ This page provides an exploratory data analysis (EDA) of the student performance
 # Machine Learning
 ## Model Building
 
-This page allows users to build multiple regression models to predict student performance. Users can  choose from a range of regression algorithms, their corresponding hyperparameters and evaluate the performance of the model using a variety of metrics.
+This page allows users to customize a KMeans clustering model to analyze the student performance dataset. Users can select the number of clusters, the min distance, and other hyperparameters to tune the model. They can also visualize the results of the clustering analysis using scatter plots and other interactive visualizations.
 
 # Contact
 
