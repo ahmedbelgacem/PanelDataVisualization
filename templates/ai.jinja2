@@ -73,7 +73,13 @@
   <div class = 'fixed left-0 top-20 w-72 h-screen bg-white z-50 drop-shadow-sm pt-12'>
     {{ embed(roots.sidebar) }}
   </div>
-  <div class = 'w-[1000px] h-[450px] bg-white rounded-lg m-12 mb-6 drop-shadow-sm'>
+  <div class = 'w-[1300px] h-[400px] bg-white rounded-lg m-12 mb-6 drop-shadow-sm'>
+    {{ embed(roots.clusterplot) }}
+    <div class = 'absolute top-4 right-4 flex items-center justify-center w-12 h-12'>
+      {{ embed(roots.spinner) }}
+    </div>
+  </div>
+  <div class = 'w-[1300px] h-[400px] bg-white rounded-lg m-12 mb-6 drop-shadow-sm'>
     {{ embed(roots.clusterplot) }}
     <div class = 'absolute top-4 right-4 flex items-center justify-center w-12 h-12'>
       {{ embed(roots.spinner) }}

@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 import plotly.graph_objects as go
 import umap
+import plotly.express as px
 from sklearn.cluster import KMeans
 
 class ClusterPlot():
@@ -19,7 +20,7 @@ class ClusterPlot():
     X_proj = reducer.fit_transform(df_enc.values)
     
     # Clustering
-    kmeans = KMeans(n_clusters = n_clusters, random_state = 0).fit(df_enc.values)
+    kmeans = KMeans(n_clusters = n_clusters, random_state = 0, n_init = 'auto').fit(df_enc.values)
     
     # Graph
     self.fig = go.Figure(
@@ -44,8 +45,7 @@ class ClusterPlot():
         marker = dict(
           color = kmeans.labels_,
           size = 8,
-          # colorscale = 'greens',
-          # showscale = True,
+          colorscale = px.colors.qualitative.Plotly,
         ),
         mode = 'markers'
       )
@@ -78,7 +78,8 @@ class ClusterPlot():
     X_proj = reducer.fit_transform(df_enc.values)
     
     # Clustering
-    kmeans = KMeans(n_clusters = n_clusters, random_state = 0).fit(df_enc.values)
+    kmeans = KMeans(n_clusters = n_clusters, random_state = 0, n_init = 'auto').fit(df_enc.values)
+    self.inertia = kmeans.inertia_
     
     self.fig.update_traces(
       selector = dict(type = 'scatter'),
