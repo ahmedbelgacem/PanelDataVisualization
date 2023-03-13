@@ -15,7 +15,7 @@ To view the website, run the following command
 ```
 panel serve dashboard.py ai.py --index=templates/index.html
 ```  
-This will launch the Panel dashboard in your web browser. The dashboard consists of three pages:
+This will launch the Panel home in your web browser. The other two other are :
 
 # Dashboard
 
@@ -28,9 +28,9 @@ This page provides an exploratory data analysis (EDA) of the student performance
 
 # Machine Learning
 ## Model Building
+
 This page allows users to build multiple regression models to predict student performance. Users can  choose from a range of regression algorithms, their corresponding hyperparameters and evaluate the performance of the model using a variety of metrics.
-## Model Evaluation
-This page provides an overview of the performance of all the models built in the previous page. Users can compare the metrics of the different models using visualizations such as box plots and scatter plots.
 
 # Contact
+
 If you have any questions or comments about this project, please contact the project owners.
