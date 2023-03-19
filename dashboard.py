@@ -1,8 +1,13 @@
 import panel as pn
+from bokeh.embed import components
+from bokeh.resources import CDN
+from bokeh.io import curdoc
+from bokeh.settings import settings
+settings.resources = 'cdn'
+settings.resources = 'inline'
 from utils.dataset import read_csv, summarize
 from components import PlotlyTable, Heatmap, Indicator, CountPlot, UMAPlot, BoxPlot
-
-pn.extension(sizing_mode = 'stretch_width')
+pn.extension(sizing_mode="stretch_width")
 with open('templates/dashboard.jinja2', 'r') as html:
   template = pn.Template('\n'.join(html.readlines()))
 template.add_variable('app_title', 'Dashboard')
