@@ -5,3 +5,4 @@ from components.countplot import CountPlot
 from components.umaplot import UMAPlot
 from components.boxplot import BoxPlot
 from components.clusterplot import ClusterPlot
+from components.regression import Regression
