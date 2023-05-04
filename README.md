@@ -1,7 +1,7 @@
 # Student Performance Prediction Dashboard
 
 This project is a web application built using Panel and Plotly that allows users to explore a dataset of student performance and build multiple regression models to predict academic outcomes.
-You can check the deployed version of this project on belgadreamsbig.com/dataviz
+You can check the deployed version of this project on [belgadreamsbig.com/dataviz](https://belgadreamsbig.com/dataviz)    
 Panel is an open-source Python library that lets you create custom interactive web apps and dashboards by connecting user-defined widgets to plots, images, tables, or text
 # Installation
 
