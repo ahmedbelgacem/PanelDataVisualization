@@ -2,7 +2,7 @@
 
 This project is a web application built using Panel and Plotly that allows users to explore a dataset of student performance and build multiple regression models to predict academic outcomes.
 Panel is an open-source Python library that lets you create custom interactive web apps and dashboards by connecting user-defined widgets to plots, images, tables, or text
-You can also check the deployed version of this project on [belgadreamsbig.com/dataviz](https://belgadreamsbig.com/dataviz)    
+You can also check the deployed version of this project on [belgadreamsbig.com/dataviz](https://belgadreamsbig.com/dataviz) - **No Longer Active**   
 # Installation
 
 To install the necessary packages, run the following command:
@@ -15,7 +15,7 @@ To view the website, run the following command
 ```
 panel serve dashboard.py ai.py --index=templates/index.html
 ```  
-This will launch the Panel home in your web browser. The other two other are :
+This will launch the Panel home in your web browser.
 
 # Dashboard
 
